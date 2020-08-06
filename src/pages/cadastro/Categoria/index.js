@@ -4,8 +4,6 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from   '../../../components/Carousel/components/FormField';
 
 function CadastroCategoria() {
-  
-
   const valoresIniciais = {
     nome: "",
     descricao: "",
@@ -18,7 +16,7 @@ function CadastroCategoria() {
   function setValue(chave, valor){
         setValues({
             ...values,
-           chave:valor,
+           [chave]:valor,
         })
   }
 
@@ -29,10 +27,10 @@ function CadastroCategoria() {
         infosDoEvento.target.value,
       );
       }
-
+      /**
       useEffect(() => {
         if (window.location.href.includes('localhost')) {
-          const URL = 'http://localhost:8080/categorias';
+          const URL = 'http://localhost:3001/categorias';
           fetch(URL)
             .then(async (respostaDoServer) => {
               if (respostaDoServer.ok) {
@@ -44,6 +42,7 @@ function CadastroCategoria() {
             });
         }
       }, []);
+      **/
     
 
 
@@ -68,13 +67,13 @@ function CadastroCategoria() {
           label= "Nome da Categoria"
           type="text"
           name="nome"
-          value={values.nomes}
+          value={values.nome}
           onChange={handleChange}
         />
 
         <FormField     
          label="Descrição"
-         type="text"   
+         type="textarea"   
          name="descricao"
          value={values.descricao}
          onChange={handleChange}
@@ -92,13 +91,13 @@ function CadastroCategoria() {
       </form>
       <ul>
         {categorias.map((categoria, indice) => (
-          <li key={` ${categoria.id}`}>{categoria.titulo}</li>
+          <li key={` ${categoria}${indice}`}>{categoria.nome}</li>
         ))}
       </ul>
 
-      <Link to="/cadastro/categoria">Go for home</Link>
+      <Link to="/">Go for home</Link>
     </PageDefault>
-  );
+  )
 }
 
 export default CadastroCategoria;
