@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
-import FormField from   '../../../components/Carousel/components/FormField';
+import FormField from  '../../../components/FormField';
+import Button from  '../../../components/Button';
+
 
 function CadastroCategoria() {
   const valoresIniciais = {
-    nome: "",
-    descricao: "",
-    cor: "",
+    nome: '',
+    descricao: '',
+    cor:'',
   };
 
   const [categorias, setCategorias] = useState([]);
@@ -17,7 +19,7 @@ function CadastroCategoria() {
         setValues({
             ...values,
            [chave]:valor,
-        })
+        });
   }
 
     function handleChange(infosDoEvento) {
@@ -27,7 +29,7 @@ function CadastroCategoria() {
         infosDoEvento.target.value,
       );
       }
-      /**
+      
       useEffect(() => {
         if (window.location.href.includes('localhost')) {
           const URL = 'http://localhost:3001/categorias';
@@ -42,7 +44,7 @@ function CadastroCategoria() {
             });
         }
       }, []);
-      **/
+    
     
 
 
@@ -87,17 +89,18 @@ function CadastroCategoria() {
           onChange={handleChange}
         />
  
-      <button type="submit">Cadastrar</button>
+      <Button type = "submit">Cadastrar</Button>
       </form>
+
       <ul>
-        {categorias.map((categoria, indice) => (
-          <li key={` ${categoria}${indice}`}>{categoria.nome}</li>
+        {categorias.map((categoria) => (
+          <li key={`${categoria.nome}`}>{categoria.nome}</li>
         ))}
       </ul>
 
       <Link to="/">Go for home</Link>
     </PageDefault>
-  )
+  );
 }
 
 export default CadastroCategoria;
